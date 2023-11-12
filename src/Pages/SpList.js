@@ -6,6 +6,15 @@ import User from '../Components/User';
 import Login from '../Components/LogIn';
 import Nothing from './Nothing';
 
+function generateRandomString(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
 function SpList({ isOwner }) {
   const [input, setInput] = useState("");
   const [h3Content, setH3Content] = useState("Shopping list");
@@ -14,7 +23,13 @@ function SpList({ isOwner }) {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [ownerId, setOwnerId] = useState(1);
   const [userId, setUserId] = useState(2);
+  const [awid, setAwid] = useState(generateRandomString(5));
   const [showNothing, setShowNothing] = useState(false);
+
+  useEffect(() => {
+    const generatedAwid = generateRandomString(5);
+    setAwid(generatedAwid);
+  }, []);
 
   const handleH3ContentChange = (event) => {
     if (isOwner) {
@@ -26,6 +41,7 @@ function SpList({ isOwner }) {
     { id: "429x966b-7182-403d-da01-c58a46d165a9", name: "Test:  3 Unicorns", completed: false },
     { id: "389a123c-7267-033m-be02-c59a76f165i0", name: "Test: Liquid Chalk", completed: true },
   ]);
+
   const [users, setUsers] = useState([
     { id: 1, name: 'Owner', isOwner: true },
     { id: 2, name: 'User 1', isOwner: false },
@@ -68,6 +84,7 @@ function SpList({ isOwner }) {
     const storedSpList = localStorage.getItem('storedSpList');
     if (storedSpList) {
       const parsedSpList = JSON.parse(storedSpList);
+      setAwid(parsedSpList.awid); // Set awid from stored data
       setSpId(parsedSpList.SpId);
       setThings(parsedSpList.things);
       setUsers(parsedSpList.users);
@@ -76,12 +93,13 @@ function SpList({ isOwner }) {
 
   useEffect(() => {
     const dataToStore = {
+      awid,
       SpId,
       things,
       users,
     };
     localStorage.setItem('storedSpList', JSON.stringify(dataToStore));
-  }, [SpId, things, users]);
+  }, [awid, SpId, things, users]);
 
   const handleToggle = (itemId) => {
     setThings((prevThings) =>
