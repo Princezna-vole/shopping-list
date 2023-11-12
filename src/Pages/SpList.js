@@ -105,7 +105,7 @@ function SpList({ isOwner }) {
     }}>
       {loggedInUser ? (
         <div>
-          <h3 contentEditable={loggedInUser.id === 1} onInput={handleH3ContentChange}>
+          <h3 contentEditable={loggedInUser.id === 1} onInput={handleH3ContentChange} style={{border: '1px solid rgb(170, 170, 219', borderRadius:'20px'}}>
             {h3Content}
           </h3>
           {loggedInUser.role === "owner" ? (

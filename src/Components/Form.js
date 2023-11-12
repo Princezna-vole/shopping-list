@@ -13,7 +13,7 @@ function Form({ input, setInput, things, setThings }) {
 
   return (
     <form onSubmit={onFormSubmit}>
-      <input type="text" value={input} required onChange={onInputChange} style={{width: '100%', padding:'5px',margin: '5px 0', border: '1px solid lavender', borderRadius: '20px', fontSize: '16px'  }}></input>
+      <input type="text" value={input} required onChange={onInputChange} style={{width: '100%', padding:'5px',margin: '5px 0', border: '1px solid lavender', borderRadius: '20px', fontSize: '16px',  }}></input>
       <button
         type="submit"
         style={{
