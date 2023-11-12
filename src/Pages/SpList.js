@@ -9,7 +9,7 @@ import Nothing from './Nothing';
 function SpList({ isOwner }) {
   const [input, setInput] = useState("");
   const [h3Content, setH3Content] = useState("Shopping list");
-  const [SpId, setSpId] = useState(1);
+  const [SpId, setSpId] = useState(100);
   const [showChecked, setShowChecked] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [ownerId, setOwnerId] = useState(1);
@@ -23,8 +23,8 @@ function SpList({ isOwner }) {
   };
 
   const [things, setThings] = useState([
-    { id: 1, name: "Test:  3 Unicorns", completed: false },
-    { id: 2, name: "Test: Liquid Chalk", completed: true },
+    { id: "429x966b-7182-403d-da01-c58a46d165a9", name: "Test:  3 Unicorns", completed: false },
+    { id: "389a123c-7267-033m-be02-c59a76f165i0", name: "Test: Liquid Chalk", completed: true },
   ]);
   const [users, setUsers] = useState([
     { id: 1, name: 'Owner', isOwner: true },
