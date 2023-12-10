@@ -5,21 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SpList from './Pages/SpList';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-
-
-
+import { AuthProvider } from './AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    <SpList />
-   
-
- 
-
-
-  </React.StrictMode>
+    <AuthProvider>
+      <App />
+      <SpList />
+    </AuthProvider>
+  </React.StrictMode>,
+  
 );
 
 // If you want to start measuring performance in your app, pass a function

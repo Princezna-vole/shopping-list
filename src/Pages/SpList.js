@@ -5,6 +5,7 @@ import List from '../Components/List';
 import User from '../Components/User';
 import Login from '../Components/LogIn';
 import Nothing from './Nothing';
+import { useAuth } from '../AuthContext';
 
 function generateRandomString(length) {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -15,16 +16,16 @@ function generateRandomString(length) {
   return result;
 }
 
-function SpList({ isOwner }) {
+function SpList({ isOwner}) {
   const [input, setInput] = useState("");
   const [h3Content, setH3Content] = useState("Shopping list");
   const [SpId, setSpId] = useState(100);
   const [showChecked, setShowChecked] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState(null);
   const [ownerId, setOwnerId] = useState(1);
   const [userId, setUserId] = useState(2);
   const [awid, setAwid] = useState(generateRandomString(5));
   const [showNothing, setShowNothing] = useState(false);
+  const { loggedInUser, login, logout, setLoggedInUser } = useAuth();
 
   useEffect(() => {
     const generatedAwid = generateRandomString(5);
@@ -84,7 +85,7 @@ function SpList({ isOwner }) {
     const storedSpList = localStorage.getItem('storedSpList');
     if (storedSpList) {
       const parsedSpList = JSON.parse(storedSpList);
-      setAwid(parsedSpList.awid); // Set awid from stored data
+      setAwid(parsedSpList.awid);
       setSpId(parsedSpList.SpId);
       setThings(parsedSpList.things);
       setUsers(parsedSpList.users);
@@ -108,11 +109,14 @@ function SpList({ isOwner }) {
       )
     );
   };
+  useEffect(() => {
 
-  const filteredItems = showChecked ? things : things.filter(item => !item.completed);
+    document.body.style.overflow = 'visible'})
+  const filteredItems = showChecked ? things : things.filter((item) => !item.completed);
 
   return (
     <div className='SpListContainer' style={{
+     
       width: '500px',
       margin: '0 auto',
       backgroundColor: 'rgb(237, 238, 238)',
@@ -140,15 +144,16 @@ function SpList({ isOwner }) {
             />
             Show All Items
           </label>
-          <List items={filteredItems} onToggle={handleToggle} setItems={setThings} />
+          <List items={filteredItems}  onToggle={handleToggle} setItems={setThings} />
           <Form input={input} setInput={setInput} things={things} setThings={setThings} />
           {showNothing && <Nothing />}
         </div>
       ) : (
-        <Login handleLogin={handleLogin} />
+        // Additional content for when the user is not logged in can be added here
+        <p>Please log in to access the Shopping List.</p>
       )}
     </div>
-  )
+  );
 }
 
 export default SpList;
