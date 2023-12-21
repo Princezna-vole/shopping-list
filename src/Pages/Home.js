@@ -48,8 +48,10 @@ function Home() {
         height: '100vh',
         display: 'flex',
         flexDirection:'column',
+        alignItems:'center',
       }}
     >
+         <h3>Active lists</h3>
       {spLists.map((spList) => (
         <div
           key={spList.id}
@@ -66,7 +68,7 @@ function Home() {
           <Button onClick={() => handleDeleteSpList(spList.id)}>Delete</Button>
         </div>
       ))}
-      <Button onClick={handleOpenModal}>New Shopping List</Button>
+      <Button onClick={handleOpenModal}> + New List</Button>
       {isModalOpen && <NewSpListModal onClose={() => setIsModalOpen(false)} onAddSpList={handleAddSpList} />}
      
         <h3>Archived lists</h3>
